@@ -45,3 +45,12 @@ def get_students(class_: Optional[List[str]] = Query(None, alias="class")):
 @app.get("/")
 def root():
     return {"message": "FastAPI app is live!"}
+
+
+@app.get("/api")
+def get_students(class_: Optional[List[str]] = Query(None, alias="class")):
+    if class_:
+        filtered_students = [s for s in students if s["class"] in class_]
+        return {"students": filtered_students}
+    return {"students": students}
+
