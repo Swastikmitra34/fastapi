@@ -40,3 +40,8 @@ def get_students(class_: Optional[List[str]] = Query(None, alias="class")):
         filtered_students = [s for s in students if s["class"] in class_]
         return {"students": filtered_students}
     return {"students": students}
+
+# Add this root route to avoid 404 on base URL
+@app.get("/")
+def root():
+    return {"message": "FastAPI app is live!"}
